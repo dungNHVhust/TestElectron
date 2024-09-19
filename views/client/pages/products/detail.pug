@@ -1,0 +1,39 @@
+extends ../../layouts/default.pug
+
+block main 
+    .container.mt-4
+        .row
+            .col-md-5
+                if(product.thumbnail)
+                    img(
+                        src=product.thumbnail
+                        class="img-fluid"
+                    )
+            .col-md-7
+                if(product.title)
+                    h1(class="product-title") #{pageTitle}
+
+                if(product.price)
+                    .price-container.mb-3
+                        del(class="old-price") #{product.price}$
+                        span(class="current-price text-danger font-weight-bold") #{product.priceNew}$
+                        span(class="badge badge-warning") #{product.discountPercentage}% GIẢM
+
+                if(product.stock)
+                    div(class="mb-3") 
+                        span Số lượng còn lại: 
+                        span(class="font-weight-bold text-success") #{product.stock}
+
+                if(product.status)
+                    div(class="mb-3") 
+                        span Trạng thái: 
+                        if(product.status === "active")
+                            span(class="badge badge-success") Hoạt động
+                        else 
+                            span(class="badge badge-danger") Dừng hoạt động
+
+                if(product.description)
+                    .product-description.mb-4
+                        h2(class="description-title") Mô tả sản phẩm
+                        p #{product.description}
+    script(src="js/product.js")
